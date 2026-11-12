@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Invitación a la Copa HaxBall TDI 2026 · viernes 4 de diciembre de 2026.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Copa HaxBall TDI 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=JetBrains+Mono:wght@500;700&family=Rubik:wght@400;500;700&display=swap">
+<style>
+/* Layout: estadio de noche. Portada con cancha viva (partido de exhibición), luego la "planilla" de la Copa en una columna de 1080px. Look único y deliberadamente oscuro. */
+:root{
+  --night:#0b1a13;
+  --stand:#112619;
+  --turf-a:#3b7548;
+  --turf-b:#447f51;
+  --chalk:#f1f5ec;
+  --muted:#a6bcab;
+  --red:#ef4f55;
+  --blue:#3f8ef2;
+  --gold:#f6c744;
+  --ink:#08100b;
+  --rule:rgba(241,245,236,.13);
+  --court:#6c6d6f;
+  --court-out:#4a4b4e;
+  --court-line:#c7cbd9;
+  --cyan:#22b2e6;
+  --ball:#f2c21b;
+  --panel:rgba(241,245,236,.045);
+  --f-display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --f-body:"Rubik",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  background:
+    radial-gradient(1200px 520px at 15% -10%, rgba(246,199,68,.09), transparent 60%),
+    radial-gradient(1000px 520px at 95% -5%, rgba(63,142,242,.10), transparent 60%),
+    var(--night);
+  color:var(--chalk);
+  font-family:var(--f-body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+.wrap{
+  max-width:1080px;margin:0 auto;
+  padding-left:max(16px, env(safe-area-inset-left,0px));
+  padding-right:max(16px, env(safe-area-inset-right,0px));
+}
+.eyebrow{
+  font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin:0;
+}
+h1,h2,h3{text-wrap:balance;margin:0}
+h2{
+  font-family:var(--f-display);font-weight:900;text-transform:uppercase;
+  font-size:clamp(40px,6vw,64px);line-height:.92;letter-spacing:.005em;
+}
+.sec{padding-block:clamp(56px,8vw,96px);border-top:1px solid var(--rule)}
+.sec-head{display:grid;gap:12px;margin-bottom:36px;max-width:680px}
+.sec-head p.lead{margin:0;color:var(--muted);font-size:17px}
+
+/* ---------- HERO ---------- */
+.hero{padding-block:clamp(28px,5vw,56px) 0}
+.hero-top{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:32px;align-items:end}
+.title{
+  font-family:var(--f-display);font-weight:900;text-transform:uppercase;
+  font-size:clamp(64px,12.5vw,152px);line-height:.8;letter-spacing:-.005em;
+  margin-top:18px;
+}
+.title .l2{display:block;color:var(--gold)}
+.title .yr{
+  display:block;color:transparent;-webkit-text-stroke:2px var(--chalk);
+  letter-spacing:.04em;
+}
+.title .dot-r,.title .dot-b{display:inline-block;width:.36em;height:.36em;border-radius:50%;border:.05em solid var(--ink);vertical-align:.12em;margin-left:.12em}
+.title .dot-r{background:var(--red)}
+.title .dot-b{background:var(--blue);margin-left:.04em}
+.hero-side{display:grid;gap:20px;min-width:0}
+.hero-side p{margin:0;font-size:18px;max-width:42ch}
+.when{
+  display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;
+  font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:28px;line-height:1;
+}
+.when small{font-family:var(--f-mono);font-weight:500;font-size:12px;letter-spacing:.12em;color:var(--muted)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font:700 15px/1 var(--f-body);text-decoration:none;
+  padding:14px 20px;border-radius:999px;border:2px solid var(--ink);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn-primary{background:var(--gold);color:var(--ink);box-shadow:0 4px 0 var(--ink)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--ink)}
+.btn-ghost{border-color:var(--rule);color:var(--chalk)}
+.btn-ghost:hover{border-color:var(--chalk)}
+
+/* Countdown as scoreboard */
+.countdown{display:flex;gap:8px;flex-wrap:wrap}
+.cd-cell{
+  min-width:68px;padding:10px 10px 8px;border-radius:10px;
+  background:var(--ink);border:1px solid var(--rule);text-align:center;
+}
+.cd-cell b{display:block;font-family:var(--f-mono);font-weight:700;font-size:26px;line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
+.cd-cell span{display:block;margin-top:6px;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* Pitch */
+.stadium{margin-top:40px}
+.board{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  padding:10px 14px;background:var(--ink);border:1px solid var(--rule);border-bottom:0;
+  border-radius:14px 14px 0 0;
+}
+.score{display:flex;align-items:center;gap:12px;font-family:var(--f-display);font-weight:900;font-size:26px;text-transform:uppercase;line-height:1}
+.score .team{display:flex;align-items:center;gap:8px}
+.score .chip{width:16px;height:16px;border-radius:50%;border:2px solid var(--chalk)}
+.score .num{font-family:var(--f-mono);font-weight:700;font-size:24px;color:var(--chalk);font-variant-numeric:tabular-nums;min-width:1.2ch;text-align:center}
+.board .live{display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.board .live i{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(239,79,85,.6);animation:pulse 1.6s infinite}
+.board .live.paused i{animation:none;background:var(--muted)}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(239,79,85,0)}100%{box-shadow:0 0 0 0 rgba(239,79,85,0)}}
+@media (prefers-reduced-motion:reduce){.board .live i{animation:none}}
+.icon-btn{
+  font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;
+  background:transparent;color:var(--chalk);border:1px solid var(--rule);border-radius:999px;padding:8px 12px;cursor:pointer;
+}
+.icon-btn:hover{border-color:var(--chalk)}
+.pitch-frame{
+  position:relative;border:1px solid var(--rule);border-radius:0 0 14px 14px;overflow:hidden;background:var(--court-out);
+}
+#pitch{display:block;width:100%;max-width:100%;aspect-ratio:840/380;height:auto}
+.mine{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;
+  margin-top:14px;padding:14px 16px;border-radius:14px;background:var(--panel);border:1px dashed var(--rule);
+}
+.mine label.lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.mine input[type=text]{
+  flex:1 1 180px;min-width:0;max-width:260px;
+  font:500 15px var(--f-body);color:var(--chalk);background:var(--ink);
+  border:1px solid var(--rule);border-radius:10px;padding:10px 12px;
+}
+.mine input[type=text]:focus{border-color:var(--gold);outline:none}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:999px;padding:3px;gap:3px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;cursor:pointer;font-weight:500;font-size:14px}
+.seg label::before{content:"";width:12px;height:12px;border-radius:50%;border:2px solid var(--ink)}
+.seg label[for=t-red]::before{background:var(--red)}
+.seg label[for=t-blue]::before{background:var(--blue)}
+.seg input:checked + label{background:var(--chalk);color:var(--ink)}
+.seg input:focus-visible + label{outline:3px solid var(--gold);outline-offset:2px}
+.mine .hint{font-size:13px;color:var(--muted);flex-basis:100%}
+
+/* ---------- Planilla ---------- */
+.sheet{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin-top:48px}
+.sheet div{padding:18px 18px 20px;border-right:1px solid var(--rule);min-width:0}
+.sheet div:last-child{border-right:0}
+.sheet dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.sheet dd{margin:8px 0 0;font-family:var(--f-display);font-weight:800;font-size:26px;line-height:1.05;text-transform:uppercase}
+.sheet dd small{display:block;margin-top:6px;font-family:var(--f-body);font-weight:400;font-size:14px;text-transform:none;color:var(--muted);line-height:1.45}
+
+/* ---------- Inscripción ---------- */
+.signup{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:40px;align-items:start}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.steps li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;padding-block:18px;border-bottom:1px solid var(--rule)}
+.steps li:first-child{padding-top:0}
+.disc-n{
+  width:48px;height:48px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--f-display);font-weight:900;font-size:24px;color:var(--chalk);
+  border:3px solid var(--ink);box-shadow:0 0 0 2px var(--rule);
+}
+.disc-n.r{background:var(--red)}
+.disc-n.b{background:var(--blue)}
+.steps h3{font-size:19px;font-weight:700;margin-top:4px}
+.steps p{margin:6px 0 0;color:var(--muted);max-width:56ch}
+.steps p strong{color:var(--chalk);font-weight:500}
+
+.dates{background:var(--ink);border:1px solid var(--rule);border-radius:16px;padding:22px}
+.dates h3{font-family:var(--f-mono);font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.track{list-style:none;margin:18px 0 0;padding:0;position:relative;display:grid;gap:22px}
+.track::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:repeating-linear-gradient(var(--rule) 0 6px, transparent 6px 12px)}
+.track li{position:relative;padding-left:36px}
+.track li::before{content:"";position:absolute;left:0;top:4px;width:20px;height:20px;border-radius:50%;background:var(--stand);border:2px solid var(--muted)}
+.track li.now::before{background:var(--chalk);border-color:var(--chalk)}
+.track li.cut::before{background:var(--gold);border-color:var(--ink)}
+.track li.day::before{background:var(--red);border-color:var(--ink);box-shadow:8px 0 0 -2px var(--blue)}
+.track .d{font-family:var(--f-display);font-weight:800;font-size:24px;text-transform:uppercase;line-height:1.05}
+.track .t{color:var(--muted);font-size:14px;margin-top:2px}
+.track .left{display:inline-block;margin-top:6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;padding:3px 8px;border-radius:999px;border:1px solid var(--rule);color:var(--chalk);font-variant-numeric:tabular-nums}
+.note{margin-top:20px;padding-top:16px;border-top:1px solid var(--rule);font-size:14px;color:var(--muted)}
+.note strong{color:var(--chalk);font-weight:500}
+
+/* ---------- Juego limpio ---------- */
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:16px;overflow:hidden}
+.rule{background:var(--night);padding:24px 22px 26px;display:grid;gap:10px;align-content:start;min-width:0}
+.rule svg{width:30px;height:30px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.rule h3{font-size:18px;font-weight:700}
+.rule p{margin:0;color:var(--muted);font-size:15px}
+.rule .big{font-family:var(--f-display);font-weight:900;font-size:44px;line-height:.9;color:var(--gold)}
+.ref{
+  margin-top:24px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  font-size:15px;color:var(--muted);
+}
+.ref .whistle{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:var(--chalk);color:var(--ink);font-weight:700}
+
+/* ---------- Tarjetas ---------- */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:end}
+.card{display:grid;gap:14px;min-width:0}
+.card .shape{
+  aspect-ratio:3/4;max-width:100%;border-radius:12px;border:2px solid var(--ink);
+  box-shadow:0 10px 24px rgba(0,0,0,.35);transform:rotate(var(--rot,0deg));
+  transition:transform .25s ease;position:relative;
+}
+.card:hover .shape{transform:rotate(0deg) translateY(-6px)}
+@media (prefers-reduced-motion:reduce){.card .shape{transition:none}.card:hover .shape{transform:rotate(var(--rot,0deg))}}
+.c1 .shape{background:var(--chalk);--rot:-4deg}
+.c2 .shape{background:var(--gold);--rot:2deg}
+.c3 .shape{background:var(--red);--rot:-2deg}
+.c4 .shape{background:var(--ink);border-color:var(--red);--rot:3deg;
+  background-image:repeating-linear-gradient(45deg, transparent 0 10px, rgba(239,79,85,.22) 10px 12px)}
+.card .shape span{position:absolute;left:12px;bottom:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;color:var(--ink);font-weight:700}
+.c4 .shape span{color:var(--red)}
+.card h3{font-size:18px;font-weight:700}
+.card p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.scale{display:flex;align-items:center;gap:10px;margin-top:28px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.scale::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--chalk),var(--gold),var(--red))}
+.scale b{order:3;color:var(--red);font-weight:500}
+
+/* ---------- Extras ---------- */
+.extras{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.box{border:1px solid var(--rule);border-radius:16px;padding:24px;background:var(--panel);min-width:0}
+.box h3{font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:28px;line-height:1}
+.box .tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block}
+.box ul{margin:14px 0 0;padding-left:18px;color:var(--muted);display:grid;gap:8px}
+.box ul li::marker{color:var(--gold)}
+
+/* ---------- Convenio ---------- */
+.legal{display:grid;gap:0;border-top:1px solid var(--rule)}
+.legal details{border-bottom:1px solid var(--rule)}
+.legal summary{
+  list-style:none;cursor:pointer;display:grid;grid-template-columns:150px minmax(0,1fr) 24px;gap:14px;align-items:baseline;
+  padding:16px 4px;
+}
+.legal summary::-webkit-details-marker{display:none}
+.legal summary .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.legal summary .v{font-weight:500;font-size:17px}
+.legal summary .pm{font-family:var(--f-mono);color:var(--gold);text-align:right;transition:transform .2s ease}
+.legal details[open] .pm{transform:rotate(45deg)}
+.legal .body{padding:0 4px 20px 168px;color:var(--muted);max-width:820px}
+.legal .body p{margin:0 0 10px}
+.legal .body ol{margin:0;padding-left:20px;display:grid;gap:6px}
+.preamble{color:var(--muted);font-size:15px;max-width:72ch;margin:0 0 20px}
+
+/* ---------- Final ---------- */
+.final{padding-block:clamp(64px,10vw,120px);border-top:1px solid var(--rule);text-align:left}
+.final .big{
+  font-family:var(--f-display);font-weight:900;text-transform:uppercase;
+  font-size:clamp(52px,10vw,124px);line-height:.85;
+}
+.final .big em{font-style:normal;color:var(--gold)}
+.final p{color:var(--muted);max-width:56ch;font-size:17px;margin:20px 0 28px}
+footer{border-top:1px solid var(--rule);padding-block:22px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+  .hero-top,.signup{grid-template-columns:minmax(0,1fr)}
+  .sheet{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sheet div:nth-child(2){border-right:0}
+  .sheet div:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+  .rules{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 18px}
+}
+@media (max-width:600px){
+  .sheet{grid-template-columns:minmax(0,1fr)}
+  .sheet div{border-right:0;border-bottom:1px solid var(--rule)}
+  .sheet div:last-child{border-bottom:0}
+  .rules,.extras{grid-template-columns:minmax(0,1fr)}
+  .legal summary{grid-template-columns:minmax(0,1fr) 24px}
+  .legal summary .k{grid-column:1/-1}
+  .legal .body{padding-left:4px}
+  .score{font-size:20px}
+  .cd-cell{min-width:60px}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div>
+        <p class="eyebrow">Asociación de HaxBall de TDI · Invitación</p>
+        <h1 class="title">Copa<span class="dot-r" aria-hidden="true"></span><span class="dot-b" aria-hidden="true"></span><span class="l2">HaxBall TDI</span><span class="yr">2026</span></h1>
+      </div>
+      <div class="hero-side">
+        <p>Te invitamos a la copa de fichas más esperada de TDI. Armá tu equipo, afiná el tiro con efecto y vení a jugar con tus compañeros.</p>
+        <div class="when">Viernes 4 de diciembre <small>Online · en HaxBall</small></div>
+        <div class="countdown" id="countdown" aria-label="Cuenta regresiva para la Copa">
+          <div class="cd-cell"><b id="cd-d">--</b><span>días</span></div>
+          <div class="cd-cell"><b id="cd-h">--</b><span>horas</span></div>
+          <div class="cd-cell"><b id="cd-m">--</b><span>min</span></div>
+          <div class="cd-cell"><b id="cd-s">--</b><span>seg</span></div>
+        </div>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#inscripcion">Quiero jugar</a>
+          <a class="btn btn-ghost" href="#convenio">Leer el convenio</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="stadium">
+      <div class="board">
+        <div class="score" aria-live="polite">
+          <span class="team"><span class="chip" style="background:var(--red)"></span>Rojo</span>
+          <span class="num" id="s-red">0</span>
+          <span style="color:var(--muted)">–</span>
+          <span class="num" id="s-blue">0</span>
+          <span class="team">Azul<span class="chip" style="background:var(--blue)"></span></span>
+        </div>
+        <div class="live" id="live"><i></i><span id="live-txt">Partido de exhibición</span>
+          <button class="icon-btn" id="pause" type="button">Pausar</button>
+        </div>
+      </div>
+      <div class="pitch-frame">
+        <canvas id="pitch" role="img" aria-label="Cancha TDI de HaxBall animada: tres fichas rojas contra tres azules persiguen la pelota."></canvas>
+      </div>
+      <form class="mine" id="mine" autocomplete="off">
+        <label class="lbl" for="nick">Tu ficha en la cancha</label>
+        <input type="text" id="nick" maxlength="14" placeholder="Escribí tu nick">
+        <div class="seg" role="radiogroup" aria-label="Equipo">
+          <input type="radio" name="team" id="t-red" value="red" checked><label for="t-red">Rojo</label>
+          <input type="radio" name="team" id="t-blue" value="blue"><label for="t-blue">Azul</label>
+        </div>
+        <span class="hint">Probá cómo se ve tu ficha. Esto es solo una vista previa y no te inscribe en la Copa.</span>
+      </form>
+    </div>
+
+    <dl class="sheet">
+      <div><dt>Fecha</dt><dd>4 · 12 · 2026<small>Viernes. Fixture y horarios los comunica la Asociación.</small></dd></div>
+      <div><dt>Inscripción</dt><dd>Firmando el convenio<small>Personal e intransferible.</small></dd></div>
+      <div><dt>Equipos</dt><dd>El tuyo o uno asignado<small>Si no venís con equipo, la Asociación te ubica en uno.</small></dd></div>
+      <div><dt>Baja</dt><dd>Hasta el 1 · 12<small>Inclusive. Avisale a la Asociación.</small></dd></div>
+    </dl>
+  </div>
+</header>
+
+<main>
+  <section class="sec" id="inscripcion">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Cómo entrar a la cancha</p>
+        <h2>Inscripción</h2>
+        <p class="lead">Cuatro pasos desde hoy hasta el pitazo inicial.</p>
+      </div>
+      <div class="signup">
+        <ol class="steps">
+          <li><span class="disc-n r">1</span><div><h3>Firmá el convenio de participación</h3><p>Tu inscripción queda <strong>confirmada con la firma</strong>. Es personal e intransferible: si necesitás un reemplazo, la Asociación lo tiene que aprobar antes.</p></div></li>
+          <li><span class="disc-n b">2</span><div><h3>Sumate a un equipo</h3><p>Jugás con el equipo con el que te inscribiste. <strong>Si no tenés</strong>, la Asociación te asigna uno.</p></div></li>
+          <li><span class="disc-n r">3</span><div><h3>Prepará tu setup</h3><p>Tu <strong>propia cuenta de HaxBall</strong>, una conexión estable y el equipo listo para jugar. Los problemas técnicos propios no obligan a reprogramar partidos.</p></div></li>
+          <li><span class="disc-n b">4</span><div><h3>Presentate a horario</h3><p>Hay <strong>10 minutos de tolerancia</strong> por partido. Pasado ese tiempo, la ausencia sin aviso puede considerarse abandono.</p></div></li>
+        </ol>
+        <aside class="dates" aria-label="Fechas clave">
+          <h3>Fechas clave</h3>
+          <ol class="track">
+            <li class="now"><div class="d" id="today-d">Hoy</div><div class="t">Buen momento para firmar y armar equipo.</div></li>
+            <li class="cut"><div class="d">Mar 1 de dic</div><div class="t">Último día para darte de baja.</div><span class="left" id="left-cut"></span></li>
+            <li class="day"><div class="d">Vie 4 de dic</div><div class="t">Copa HaxBall TDI 2026.</div><span class="left" id="left-day"></span></li>
+          </ol>
+          <p class="note"><strong>¿Al final no podés?</strong> Avisá a la Asociación hasta el 1 de diciembre inclusive. Las bajas posteriores pueden tenerse en cuenta para futuras inscripciones.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="juego-limpio">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Lo que firmás</p>
+        <h2>Juego limpio</h2>
+        <p class="lead">Las reglas de la casa. Son pocas y valen dentro del juego y en todos los canales de la Copa.</p>
+      </div>
+      <div class="rules">
+        <div class="rule">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+          <h3>Tu cuenta, solo tuya</h3>
+          <p>Jugás únicamente con tu cuenta de HaxBall y no la compartís con nadie.</p>
+        </div>
+        <div class="rule">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/><path d="M9 10l-2 2 2 2M15 10l2 2-2 2"/></svg>
+          <h3>Cero ayudas</h3>
+          <p>Nada de bots, macros, scripts, clientes modificados ni software que dé ventaja.</p>
+        </div>
+        <div class="rule">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M7 20h10M4 8h16"/><path d="M6 8l-3 6h6zM18 8l-3 6h6z"/></svg>
+          <h3>Resultados limpios</h3>
+          <p>No se manipulan resultados ni se arreglan partidos. Sin conductas antideportivas.</p>
+        </div>
+        <div class="rule">
+          <span class="big">10'</span>
+          <h3>A horario</h3>
+          <p>Tolerancia de diez minutos. Después, la ausencia sin aviso puede contar como abandono.</p>
+        </div>
+        <div class="rule">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/></svg>
+          <h3>Tu conexión, tu responsabilidad</h3>
+          <p>Si se te cae internet, no hay reprogramación asegurada. La Asociación decide cada caso.</p>
+        </div>
+        <div class="rule">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+          <h3>Respeto siempre</h3>
+          <p>Con jugadores, árbitros, organizadores y público. Sin insultos, discriminación ni acoso, según las políticas de convivencia de TDI.</p>
+        </div>
+      </div>
+      <p class="ref"><span class="whistle">Árbitro</span> Las decisiones de los árbitros y de la Asociación sobre resultados, sanciones e interpretación del reglamento son definitivas.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="sanciones">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Si algo no se cumple</p>
+        <h2>Las tarjetas</h2>
+        <p class="lead">La Asociación aplica la sanción según la gravedad de la falta.</p>
+      </div>
+      <div class="cards">
+        <div class="card c1"><div class="shape" aria-hidden="true"><span>AVISO</span></div><div><h3>Advertencia</h3><p>Un llamado de atención formal.</p></div></div>
+        <div class="card c2"><div class="shape" aria-hidden="true"><span>−PTS</span></div><div><h3>Pérdida de puntos o del partido</h3><p>El resultado se ajusta en contra.</p></div></div>
+        <div class="card c3"><div class="shape" aria-hidden="true"><span>AFUERA</span></div><div><h3>Descalificación</h3><p>Quedás fuera de la Copa 2026.</p></div></div>
+        <div class="card c4"><div class="shape" aria-hidden="true"><span>2027+</span></div><div><h3>Inhabilitación</h3><p>Sin acceso a futuras ediciones.</p></div></div>
+      </div>
+      <div class="scale">Más leve <b>Más grave</b></div>
+    </div>
+  </section>
+
+  <section class="sec" id="detalles">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Lo que conviene saber</p>
+        <h2>Premios, cámaras y datos</h2>
+      </div>
+      <div class="extras">
+        <div class="box">
+          <span class="tag">Séptima</span>
+          <h3>Premios</h3>
+          <ul>
+            <li>Si los hay, la Asociación los anuncia a su debido tiempo.</li>
+            <li>No se canjean por dinero ni se transfieren, salvo que la Asociación lo indique.</li>
+            <li>Un premio puede quedar retenido mientras se investiga una posible infracción.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <span class="tag">Octava</span>
+          <h3>En vivo</h3>
+          <ul>
+            <li>Los partidos se pueden transmitir, grabar y difundir.</li>
+            <li>Tu nombre, nick y resultados pueden aparecer en comunicaciones internas y redes de TDI.</li>
+            <li>Es solo para informar y difundir la Copa, sin compensación.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <span class="tag">Novena</span>
+          <h3>Tus datos</h3>
+          <ul>
+            <li>Se usan únicamente para organizar la Copa.</li>
+            <li>No se ceden a terceros.</li>
+            <li>Podés pedir acceso, corrección o borrado por los canales oficiales de la Asociación.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <span class="tag">Décima</span>
+          <h3>Si se cae el server</h3>
+          <ul>
+            <li>La Asociación no responde por fallas de los servidores de HaxBall, cortes de conexión ni cambios en la plataforma.</li>
+            <li>Por fuerza mayor o causas técnicas, la Copa puede reprogramarse o cancelarse.</li>
+            <li>Fixture y horarios pueden cambiar; se avisa con la mayor antelación posible.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="convenio">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Letra chica, completa</p>
+        <h2>El convenio</h2>
+        <p class="lead">Convenio de participación de la Copa HaxBall TDI 2026. Abrí cada cláusula para leer el texto.</p>
+      </div>
+      <p class="preamble">Entre la Asociación de HaxBall de TDI ("la Asociación") y la persona que lo suscribe ("el/la Firmante"), en conjunto "las Partes", se celebra el presente convenio sujeto a las siguientes cláusulas.</p>
+      <div class="legal">
+        <details><summary><span class="k">Primera</span><span class="v">Objeto</span><span class="pm">+</span></summary><div class="body"><p>El presente convenio regula la participación del/de la Firmante en la Copa HaxBall TDI 2026 ("la Copa"), organizada por la Asociación, que se llevará a cabo el día 4 de diciembre de 2026.</p></div></details>
+        <details><summary><span class="k">Segunda</span><span class="v">Inscripción</span><span class="pm">+</span></summary><div class="body"><ol><li>La inscripción queda confirmada con la firma del presente convenio.</li><li>El/la Firmante integrará el equipo con el que se haya inscripto o, en su defecto, el que le asigne la Asociación.</li><li>La inscripción es personal e intransferible. Cualquier reemplazo deberá ser aprobado previamente por la Asociación.</li></ol></div></details>
+        <details><summary><span class="k">Tercera</span><span class="v">Reglamento</span><span class="pm">+</span></summary><div class="body"><ol><li>El/la Firmante declara conocer y aceptar el Reglamento de la Copa publicado por la Asociación, que forma parte integrante de este convenio.</li><li>La Asociación podrá modificar el Reglamento, el fixture o los horarios por razones organizativas o técnicas, comunicándolo con la mayor antelación posible.</li><li>Las decisiones de los árbitros y de la Asociación sobre resultados, sanciones e interpretación del Reglamento son definitivas.</li></ol></div></details>
+        <details><summary><span class="k">Cuarta</span><span class="v">Obligaciones del/de la Firmante</span><span class="pm">+</span></summary><div class="body"><p>El/la Firmante se compromete a:</p><ol type="a"><li>Presentarse en el horario indicado para cada partido. La ausencia sin aviso dentro de los diez (10) minutos de tolerancia podrá considerarse abandono.</li><li>Utilizar únicamente su propia cuenta de HaxBall y no compartirla con terceros.</li><li>No utilizar bots, macros, scripts, modificaciones del cliente ni ningún software que otorgue ventaja indebida.</li><li>No manipular resultados, acordar partidos ni realizar cualquier otra conducta antideportiva.</li><li>Contar con la conexión y el equipamiento necesarios para jugar. Los problemas técnicos propios no obligan a la Asociación a reprogramar partidos, salvo decisión en contrario de esta.</li></ol></div></details>
+        <details><summary><span class="k">Quinta</span><span class="v">Conducta y convivencia</span><span class="pm">+</span></summary><div class="body"><ol><li>El/la Firmante mantendrá en todo momento un trato respetuoso hacia otros jugadores, árbitros, organizadores y público, tanto dentro del juego como en los canales de comunicación de la Copa.</li><li>Quedan prohibidos los insultos, la discriminación de cualquier tipo, el acoso y cualquier conducta que contradiga las políticas internas de convivencia de TDI.</li></ol></div></details>
+        <details><summary><span class="k">Sexta</span><span class="v">Sanciones</span><span class="pm">+</span></summary><div class="body"><p>Ante el incumplimiento de este convenio o del Reglamento, la Asociación podrá aplicar, según la gravedad, las siguientes sanciones: advertencia, pérdida de puntos o del partido, descalificación de la Copa y/o inhabilitación para futuras ediciones.</p></div></details>
+        <details><summary><span class="k">Séptima</span><span class="v">Premios</span><span class="pm">+</span></summary><div class="body"><ol><li>Los premios, si los hubiera, serán los que la Asociación informe oportunamente.</li><li>Los premios no son canjeables por dinero ni transferibles, salvo indicación expresa de la Asociación.</li><li>La Asociación podrá retener un premio mientras investiga una posible infracción.</li></ol></div></details>
+        <details><summary><span class="k">Octava</span><span class="v">Uso de imagen y transmisión</span><span class="pm">+</span></summary><div class="body"><p>El/la Firmante autoriza a la Asociación a transmitir, grabar y difundir los partidos en los que participe, así como a utilizar su nombre, nick y resultados en comunicaciones internas y en redes vinculadas a TDI, con fines exclusivamente informativos y de difusión de la Copa, sin derecho a compensación.</p></div></details>
+        <details><summary><span class="k">Novena</span><span class="v">Datos personales</span><span class="pm">+</span></summary><div class="body"><p>Los datos personales del/de la Firmante serán utilizados únicamente para la organización de la Copa y no serán cedidos a terceros. El/la Firmante podrá solicitar su acceso, rectificación o supresión contactando a la Asociación por sus canales oficiales.</p></div></details>
+        <details><summary><span class="k">Décima</span><span class="v">Responsabilidad</span><span class="pm">+</span></summary><div class="body"><ol><li>La Asociación no se responsabiliza por fallas de los servidores de HaxBall, cortes de conexión, cambios en la plataforma ni otros hechos ajenos a su control.</li><li>Si la Copa no pudiera realizarse en la fecha prevista por causas de fuerza mayor o técnicas, la Asociación podrá reprogramarla o cancelarla, sin que ello genere derecho a reclamo alguno.</li></ol></div></details>
+        <details><summary><span class="k">Decimoprimera</span><span class="v">Baja</span><span class="pm">+</span></summary><div class="body"><p>El/la Firmante podrá darse de baja de la Copa notificándolo a la Asociación hasta el día 1 de diciembre de 2026 inclusive. Las bajas posteriores podrán ser tenidas en cuenta para futuras inscripciones.</p></div></details>
+        <details><summary><span class="k">Decimosegunda</span><span class="v">Aceptación</span><span class="pm">+</span></summary><div class="body"><p>Con su firma, el/la Firmante declara haber leído, comprendido y aceptado la totalidad de las cláusulas del presente convenio y del Reglamento de la Copa.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <p class="eyebrow">Viernes 4 de diciembre de 2026</p>
+      <p class="big">Nos vemos<br>en la <em>cancha</em></p>
+      <p>Pedile el convenio a la Asociación de HaxBall de TDI, firmalo y tu lugar en la Copa queda confirmado.</p>
+      <a class="btn btn-primary" href="#inscripcion">Ver cómo inscribirme</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>Asociación de HaxBall de TDI</span><span>Copa HaxBall TDI 2026 · 04.12.2026</span></div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- Countdown & dates ---------- */
+  var target = new Date(2026, 11, 4, 0, 0, 0);
+  var cut = new Date(2026, 11, 2, 0, 0, 0); // end of Dec 1 inclusive
+  function pad(n){return (n<10?'0':'')+n}
+  function tick(){
+    var ms = target - new Date();
+    if (ms < 0) ms = 0;
+    var s = Math.floor(ms/1000);
+    document.getElementById('cd-d').textContent = pad(Math.floor(s/86400));
+    document.getElementById('cd-h').textContent = pad(Math.floor(s%86400/3600));
+    document.getElementById('cd-m').textContent = pad(Math.floor(s%3600/60));
+    document.getElementById('cd-s').textContent = pad(s%60);
+  }
+  tick(); setInterval(tick, 1000);
+
+  function daysUntil(d){
+    var now = new Date(); now.setHours(0,0,0,0);
+    var t = new Date(d); t.setHours(0,0,0,0);
+    return Math.round((t-now)/86400000);
+  }
+  var dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  var meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  var now = new Date();
+  document.getElementById('today-d').textContent = 'Hoy · ' + dias[now.getDay()] + ' ' + now.getDate() + ' de ' + meses[now.getMonth()];
+  function leftTxt(n, past){ return n > 1 ? 'Faltan ' + n + ' días' : n === 1 ? 'Es mañana' : n === 0 ? 'Es hoy' : past; }
+  document.getElementById('left-cut').textContent = leftTxt(daysUntil(new Date(2026,11,1)), 'Plazo cerrado');
+  document.getElementById('left-day').textContent = leftTxt(daysUntil(target), 'Ya se jugó');
+
+  /* ---------- Pitch simulation ---------- */
+  var cv = document.getElementById('pitch');
+  var ctx = cv.getContext('2d');
+  var W = 840, H = 380;
+  var X0 = 50, X1 = 790, Y0 = 30, Y1 = 350, GY0 = 138, GY1 = 242, GD = 26;
+  var PR = 15, BR = 10;
+  var css = getComputedStyle(document.documentElement);
+  function c(n){ return css.getPropertyValue(n).trim(); }
+  var COL = { court:c('--court'), out:c('--court-out'), line:c('--court-line'), cyan:c('--cyan'), ball:c('--ball'), chalk:c('--chalk'), red:c('--red'), blue:c('--blue'), ink:c('--ink'), gold:c('--gold') };
+
+  var grain = null;
+  function makeGrain(){
+    var g = document.createElement('canvas'); g.width = g.height = 96;
+    var gx = g.getContext('2d'), id = gx.createImageData(96,96);
+    for (var i=0;i<id.data.length;i+=4){
+      var v = Math.random()*2-1;
+      id.data[i]=id.data[i+1]=id.data[i+2]= v>0?255:0;
+      id.data[i+3] = Math.abs(v)*34;
+    }
+    gx.putImageData(id,0,0);
+    grain = ctx.createPattern(g,'repeat');
+  }
+  function drawLogo(cx,cy){
+    ctx.save(); ctx.translate(cx,cy); ctx.scale(.673,.673);
+    ctx.lineWidth = 8; ctx.lineCap = 'butt'; ctx.lineJoin = 'miter';
+    ctx.strokeStyle = COL.cyan;
+    ctx.beginPath(); ctx.moveTo(-68,-24); ctx.lineTo(-14,-24); ctx.moveTo(-41,-24); ctx.lineTo(-41,30); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-6,-24); ctx.lineTo(28,-24); ctx.arc(28,2,26,-Math.PI/2,Math.PI/2); ctx.lineTo(-24,28); ctx.stroke();
+    ctx.strokeStyle = COL.red;
+    ctx.beginPath(); ctx.moveTo(66,-30); ctx.lineTo(66,30); ctx.stroke();
+    ctx.restore();
+  }
+  function drawCourt(){
+    var cx = (X0+X1)/2, cy = (Y0+Y1)/2, R = 54;
+    ctx.fillStyle = COL.out; ctx.fillRect(0,0,W,H);
+    ctx.fillStyle = COL.court; ctx.fillRect(X0,Y0,X1-X0,Y1-Y0);
+    ctx.fillStyle = 'rgba(255,255,255,.028)';
+    for (var x=X0; x<X1; x+=54) ctx.fillRect(x,Y0,27,Y1-Y0);
+    if (!grain) makeGrain();
+    ctx.fillStyle = grain; ctx.fillRect(0,0,W,H);
+
+    ctx.strokeStyle = COL.line; ctx.lineWidth = 2.2;
+    ctx.strokeRect(X0,Y0,X1-X0,Y1-Y0);
+    ctx.beginPath(); ctx.moveTo(cx,Y0); ctx.lineTo(cx,cy-R); ctx.moveTo(cx,cy+R); ctx.lineTo(cx,Y1); ctx.stroke();
+    ctx.save(); ctx.strokeStyle = 'rgba(28,32,44,.55)'; ctx.beginPath(); ctx.moveTo(cx,cy-R); ctx.lineTo(cx,cy+R); ctx.stroke(); ctx.restore();
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.stroke();
+
+    var aTop = Y0+27, aBot = Y0+297, depth = 109, rad = 94;
+    [[X0,1],[X1,-1]].forEach(function(s){
+      var gx = s[0], d = s[1];
+      ctx.strokeStyle = COL.line; ctx.lineWidth = 2.2;
+      ctx.beginPath();
+      ctx.moveTo(gx,aTop);
+      ctx.arcTo(gx+d*depth,aTop,gx+d*depth,aBot,rad);
+      ctx.arcTo(gx+d*depth,aBot,gx,aBot,rad);
+      ctx.lineTo(gx,aBot);
+      ctx.stroke();
+      ctx.fillStyle = COL.line;
+      [118,184].forEach(function(px){ ctx.beginPath(); ctx.arc(gx+d*px,cy,3.4,0,Math.PI*2); ctx.fill(); });
+      ctx.beginPath();
+      ctx.moveTo(gx-d*16,Y0+80); ctx.lineTo(gx-d*5,Y0+80);
+      ctx.moveTo(gx-d*16,Y0+244); ctx.lineTo(gx-d*5,Y0+244);
+      ctx.moveTo(gx+d*114,Y0); ctx.lineTo(gx+d*114,Y0-8);
+      ctx.moveTo(gx+d*114,Y1); ctx.lineTo(gx+d*114,Y1+8);
+      ctx.stroke();
+    });
+    ctx.beginPath();
+    [[X0,Y0,0],[X1,Y0,Math.PI/2],[X1,Y1,Math.PI],[X0,Y1,1.5*Math.PI]].forEach(function(k){
+      ctx.moveTo(k[0]+10*Math.cos(k[2]), k[1]+10*Math.sin(k[2]));
+      ctx.arc(k[0],k[1],10,k[2],k[2]+Math.PI/2);
+    });
+    ctx.stroke();
+
+    drawLogo(cx,cy);
+
+    [[X0,-1,COL.red],[X1,1,COL.cyan]].forEach(function(g){
+      var gx = g[0], d = g[1]*GD;
+      ctx.strokeStyle = g[2]; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(gx,GY0); ctx.lineTo(gx+d,GY0); ctx.lineTo(gx+d,GY1); ctx.lineTo(gx,GY1); ctx.stroke();
+      [GY0,GY1].forEach(function(py){ ctx.beginPath(); ctx.arc(gx,py,5,0,Math.PI*2); ctx.fillStyle = g[2]; ctx.fill(); ctx.strokeStyle = COL.ink; ctx.lineWidth = 1.8; ctx.stroke(); });
+    });
+    [[X0,Y0],[X1,Y0],[X0,Y1],[X1,Y1]].forEach(function(p){ ctx.beginPath(); ctx.arc(p[0],p[1],3,0,Math.PI*2); ctx.fillStyle = COL.cyan; ctx.fill(); ctx.strokeStyle = COL.ink; ctx.lineWidth = 1.5; ctx.stroke(); });
+  }
+
+  var scale = 1, dpr = 1;
+  function resize(){
+    var w = cv.clientWidth || 840;
+    dpr = window.devicePixelRatio || 1;
+    cv.width = Math.round(w*dpr);
+    cv.height = Math.round(w*H/W*dpr);
+    scale = w/W;
+    draw();
+  }
+
+  var homes = {
+    red:  [[X0+40,0.5,'keeper'],[300,0.3],[300,0.7]],
+    blue: [[X1-40,0.5,'keeper'],[540,0.3],[540,0.7]]
+  };
+  var players = [], ball, score = {red:0, blue:0}, freeze = 0, goalTeam = null;
+  var myNick = '', myTeam = 'red';
+
+  function reset(kickoffTeam){
+    players = [];
+    ['red','blue'].forEach(function(t){
+      homes[t].forEach(function(h, i){
+        players.push({team:t, i:i, x:h[0], y:Y0+(Y1-Y0)*h[1], vx:0, vy:0, cd:0, kick:0, keeper:h[2]==='keeper', num:String(i===0?1:i+(t==='red'?8:9))});
+      });
+    });
+    var dir = kickoffTeam === 'blue' ? -1 : 1;
+    ball = {x:(X0+X1)/2, y:(Y0+Y1)/2, vx:dir*(1.5+Math.random()), vy:(Math.random()-.5)*3};
+  }
+
+  function norm(x,y){ var d=Math.hypot(x,y)||1; return [x/d,y/d,d]; }
+
+  function step(){
+    if (freeze > 0){
+      freeze--;
+      if (freeze === 0) reset(goalTeam === 'red' ? 'blue' : 'red');
+      return;
+    }
+    // closest field player per team chases
+    var chaser = {};
+    ['red','blue'].forEach(function(t){
+      var best=null, bd=1e9;
+      players.forEach(function(p){ if(p.team===t && !p.keeper){ var d=Math.hypot(p.x-ball.x,p.y-ball.y); if(d<bd){bd=d;best=p;} } });
+      chaser[t]=best;
+    });
+    players.forEach(function(p){
+      var gx = p.team==='red' ? X1+10 : X0-10;
+      var gy = (GY0+GY1)/2 + (Math.sin(Date.now()/700 + p.i)*30);
+      var g = norm(gx-ball.x, gy-ball.y);
+      var tx, ty;
+      var ownX = p.team==='red' ? X0 : X1;
+      var keeperInRange = p.keeper && Math.abs(ball.x-ownX) < 150;
+      if (p === chaser[p.team] || keeperInRange){
+        var toB = norm(ball.x-p.x, ball.y-p.y);
+        var behind = toB[0]*g[0] + toB[1]*g[1];
+        var off = behind < 0.35 ? 26 : 2;
+        tx = ball.x - g[0]*(PR+BR+off);
+        ty = ball.y - g[1]*(PR+BR+off) + (behind < 0.35 ? (p.y < ball.y ? -18 : 18) : 0);
+        if (behind > 0.2 && toB[2] < PR+BR+6 && p.cd === 0){
+          var k = norm(g[0], g[1] + (Math.random()-.5)*0.5);
+          var pow = p.keeper ? 7.5 : 5.6 + Math.random()*2;
+          ball.vx += k[0]*pow; ball.vy += k[1]*pow;
+          p.cd = 28 + (Math.random()*20|0); p.kick = 9;
+        }
+      } else if (p.keeper){
+        tx = ownX + (p.team==='red' ? 22 : -22);
+        ty = Math.max(GY0+10, Math.min(GY1-10, ball.y));
+      } else {
+        var h = homes[p.team][p.i];
+        tx = h[0] + (ball.x - (X0+X1)/2)*0.55;
+        ty = Y0+(Y1-Y0)*h[1] + (ball.y-(Y0+Y1)/2)*0.35;
+      }
+      var a = norm(tx-p.x, ty-p.y);
+      var acc = Math.min(0.34, a[2]*0.03);
+      p.vx = (p.vx + a[0]*acc)*0.93;
+      p.vy = (p.vy + a[1]*acc)*0.93;
+      p.x += p.vx; p.y += p.vy;
+      p.x = Math.max(PR, Math.min(W-PR, p.x));
+      p.y = Math.max(PR, Math.min(H-PR, p.y));
+      if (p.cd > 0) p.cd--;
+      if (p.kick > 0) p.kick--;
+    });
+    // player-player separation
+    for (var i=0;i<players.length;i++) for (var j=i+1;j<players.length;j++){
+      var A=players[i], B=players[j], n=norm(B.x-A.x,B.y-A.y);
+      if (n[2] < PR*2){ var o=(PR*2-n[2])/2; A.x-=n[0]*o; A.y-=n[1]*o; B.x+=n[0]*o; B.y+=n[1]*o; }
+    }
+    // player-ball
+    players.forEach(function(p){
+      var n = norm(ball.x-p.x, ball.y-p.y);
+      if (n[2] < PR+BR){
+        ball.x = p.x + n[0]*(PR+BR); ball.y = p.y + n[1]*(PR+BR);
+        var rel = (p.vx-ball.vx)*n[0] + (p.vy-ball.vy)*n[1];
+        if (rel > 0){ ball.vx += n[0]*rel*1.5; ball.vy += n[1]*rel*1.5; }
+      }
+    });
+    // ball
+    ball.vx *= 0.988; ball.vy *= 0.988;
+    var sp = Math.hypot(ball.vx, ball.vy); if (sp > 11){ ball.vx*=11/sp; ball.vy*=11/sp; }
+    ball.x += ball.vx; ball.y += ball.vy;
+    var inMouth = ball.y > GY0+BR && ball.y < GY1-BR;
+    if (ball.y < Y0+BR && !(ball.x < X0 || ball.x > X1)){ ball.y = Y0+BR; ball.vy = Math.abs(ball.vy)*0.8; }
+    if (ball.y > Y1-BR && !(ball.x < X0 || ball.x > X1)){ ball.y = Y1-BR; ball.vy = -Math.abs(ball.vy)*0.8; }
+    if (!inMouth){
+      if (ball.x < X0+BR){ ball.x = X0+BR; ball.vx = Math.abs(ball.vx)*0.8; }
+      if (ball.x > X1-BR){ ball.x = X1-BR; ball.vx = -Math.abs(ball.vx)*0.8; }
+    } else {
+      if (ball.x < X0-GD+BR){ ball.x = X0-GD+BR; ball.vx = Math.abs(ball.vx)*0.3; }
+      if (ball.x > X1+GD-BR){ ball.x = X1+GD-BR; ball.vx = -Math.abs(ball.vx)*0.3; }
+      if (ball.x < X0-BR || ball.x > X1+BR){
+        if (ball.y < GY0+BR){ ball.y = GY0+BR; ball.vy = Math.abs(ball.vy)*0.5; }
+        if (ball.y > GY1-BR){ ball.y = GY1-BR; ball.vy = -Math.abs(ball.vy)*0.5; }
+      }
+    }
+    if (ball.x < X0-BR-2 && freeze===0){ goal('blue'); }
+    else if (ball.x > X1+BR+2 && freeze===0){ goal('red'); }
+  }
+
+  function goal(t){
+    score[t]++; goalTeam = t; freeze = 110;
+    document.getElementById('s-red').textContent = score.red;
+    document.getElementById('s-blue').textContent = score.blue;
+  }
+
+  function draw(){
+    ctx.setTransform(scale*dpr,0,0,scale*dpr,0,0);
+    drawCourt();
+    // ball
+    ctx.beginPath(); ctx.arc(ball.x, ball.y, BR, 0, Math.PI*2);
+    ctx.fillStyle = COL.ball; ctx.fill(); ctx.lineWidth = 2.5; ctx.strokeStyle = COL.ink; ctx.stroke();
+    // players
+    var mine = myNick ? players.filter(function(p){return p.team===myTeam && !p.keeper;})[0] : null;
+    players.forEach(function(p){
+      ctx.beginPath(); ctx.arc(p.x, p.y, PR, 0, Math.PI*2);
+      ctx.fillStyle = p.team==='red' ? COL.red : COL.blue; ctx.fill();
+      ctx.lineWidth = 3; ctx.strokeStyle = p.kick>0 ? COL.chalk : COL.ink; ctx.stroke();
+      var label = p===mine ? myNick.replace(/\s+/g,'').slice(0,2).toUpperCase() : p.num;
+      ctx.fillStyle = COL.chalk; ctx.font = '700 13px Rubik, system-ui, sans-serif';
+      ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(label, p.x, p.y+1);
+      if (p===mine){
+        ctx.font = '700 13px Rubik, system-ui, sans-serif';
+        var tw = ctx.measureText(myNick).width + 14;
+        ctx.fillStyle = COL.ink; ctx.globalAlpha=.75;
+        ctx.fillRect(p.x - tw/2, p.y - PR - 26, tw, 19);
+        ctx.globalAlpha=1; ctx.fillStyle = COL.gold;
+        ctx.fillText(myNick, p.x, p.y - PR - 16);
+      }
+    });
+    if (freeze > 0){
+      ctx.fillStyle = 'rgba(8,16,11,.45)'; ctx.fillRect(0,0,W,H);
+      ctx.font = '900 96px "Big Shoulders Display", Impact, sans-serif';
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.lineWidth = 8; ctx.strokeStyle = COL.ink; ctx.strokeText('¡GOL!', W/2, H/2);
+      ctx.fillStyle = goalTeam==='red' ? COL.red : COL.blue; ctx.fillText('¡GOL!', W/2, H/2);
+    }
+  }
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var running = !reduce, raf = null, last = 0, acc = 0;
+  function loop(t){
+    if (!last) last = t;
+    acc += Math.min(100, t-last); last = t;
+    while (acc >= 16.67){ step(); acc -= 16.67; }
+    draw();
+    raf = running ? requestAnimationFrame(loop) : null;
+  }
+  var pauseBtn = document.getElementById('pause'), live = document.getElementById('live');
+  function setRunning(r){
+    running = r;
+    pauseBtn.textContent = r ? 'Pausar' : 'Reproducir';
+    live.classList.toggle('paused', !r);
+    if (r && !raf){ last = 0; raf = requestAnimationFrame(loop); }
+  }
+  pauseBtn.addEventListener('click', function(){ setRunning(!running); });
+
+  // Nick preview
+  var nickEl = document.getElementById('nick');
+  try { var saved = JSON.parse(localStorage.getItem('copa-hax-nick') || 'null'); if (saved){ nickEl.value = saved.nick||''; myNick = (saved.nick||'').trim(); myTeam = saved.team==='blue'?'blue':'red'; document.getElementById(myTeam==='blue'?'t-blue':'t-red').checked = true; } } catch(e){}
+  function save(){ try { localStorage.setItem('copa-hax-nick', JSON.stringify({nick:myNick, team:myTeam})); } catch(e){} }
+  nickEl.addEventListener('input', function(){ myNick = nickEl.value.trim(); save(); if(!running) draw(); });
+  document.querySelectorAll('input[name=team]').forEach(function(r){ r.addEventListener('change', function(){ myTeam = r.value; save(); if(!running) draw(); }); });
+  document.getElementById('mine').addEventListener('submit', function(e){ e.preventDefault(); });
+
+  reset('red');
+  if (window.ResizeObserver) new ResizeObserver(resize).observe(cv); else window.addEventListener('resize', resize);
+  resize();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  setRunning(running);
+  if (!running){ for (var k=0;k<40;k++) step(); draw(); }
+})();
+</script>
+</body>
+</html>
